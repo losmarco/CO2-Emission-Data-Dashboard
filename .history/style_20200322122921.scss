@@ -1,0 +1,29 @@
+//Google Font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// Font
+@mixin header{
+
+}
+@mixin text{
+    
+}
+
+// Color
+$backgroun-white:#f4f7fc;
+$solid-white: #ffffff;
+$grey: #828f95;
+$black: #252831;
+$purple: #7b43a1;
+$orange: #ff9824;
+$pink: #f2317a;
+$primary-green:#58cf6c;
+$secondary-green: #43a19e;
+
+body{
+    background: $backgroun-white;
+}
+
+.main_graph{
+    border: 2px black solid;
+}

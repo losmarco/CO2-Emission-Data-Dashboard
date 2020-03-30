@@ -1,0 +1,78 @@
+//Google Font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// Font
+@mixin header{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+@mixin text{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+// Color
+$backgroun-white:#f4f7fc;
+$white: #ffffff;
+$grey: #828f95;
+$black: #252831;
+$purple: #7b43a1;
+$orange: #ff9824;
+$pink: #f2317a;
+$primary-green:#58cf6c;
+$secondary-green: #43a19e;
+
+//Card
+@mixin card-background{
+    background-color: $white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.06);
+}
+
+
+body{
+    background: $backgroun-white;
+}
+
+
+.container{
+    display:grid;
+    padding: 1em;
+    
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns:repeat(4, 1fr);
+    grid-gap: 1em;
+    border: 1px solid black;
+    margin: 1em auto;  
+   
+    
+}
+
+.main_graph{
+    grid-row:1/4;
+    grid-column: 1/4;
+}
+
+.graph1{
+    grid-row:1/2;
+    grid-column: 4/5;
+}
+
+.graph2{
+    grid-row:2/3;
+    grid-column: 4/5;
+
+    #donut{
+        margin: 0 auto;
+        backgorund:red;
+    }
+}
+
+.graph3{  
+    grid-row:3/4;
+    grid-column: 4/5;
+}
+
+.card{
+    @include card-background;
+}
