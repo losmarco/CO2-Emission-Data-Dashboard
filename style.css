@@ -1,32 +1,160 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap");
+html {
+  font-size: 12px; }
+
 body {
-  background: #f4f7fc; }
+  background: #f4f7fc;
+  font-family: 'Nunito', sans-serif; }
 
 .container {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1em;
-  border: 1px solid black;
   margin: 1em auto; }
 
 .main_graph {
   grid-row: 1/4;
   grid-column: 1/4; }
 
-.graph1 {
+.graph-daily-data {
   grid-row: 1/2;
-  grid-column: 4/5; }
+  grid-column: 4/5;
+  width: 450px;
+  height: 300px;
+  position: relative; }
+  .graph-daily-data h1 {
+    float: right;
+    color: #252831;
+    width: 40%;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
+    text-align: center;
+    margin: 3rem .5rem 0 0; }
+  .graph-daily-data .current-data {
+    float: left;
+    background: #ffffff;
+    position: relative;
+    display: block;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: solid 2px rgba(27, 88, 201, 0.7);
+    box-sizing: border-box;
+    margin: 2.5rem 0 0 1rem;
+    text-align: center; }
+    .graph-daily-data .current-data .inner-circle {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: #e7f2fe;
+      box-sizing: border-box;
+      top: 50%;
+      left: 50%;
+      margin-top: -110px;
+      margin-left: -110px; }
+      .graph-daily-data .current-data .inner-circle #group {
+        padding-top: 6rem;
+        padding-left: 1rem; }
+        .graph-daily-data .current-data .inner-circle #group #current-data-value {
+          display: inline-block;
+          margin: 0;
+          color: #003059;
+          font-size: 3.5rem;
+          font-weight: 600; }
+        .graph-daily-data .current-data .inner-circle #group #current-data-unit {
+          display: inline-block;
+          letter-spacing: 0.1rem;
+          margin: 0;
+          width: max-content;
+          color: #003059;
+          font-size: 1rem;
+          font-weight: 400; }
+      .graph-daily-data .current-data .inner-circle #current-data-date {
+        letter-spacing: 0.05rem;
+        color: #252831;
+        font-size: 1.2rem;
+        font-weight: 400; }
+  .graph-daily-data .changes-data {
+    float: right;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    margin-right: 3.8rem;
+    margin-top: 1rem; }
+    .graph-daily-data .changes-data .child {
+      text-align: center; }
+    .graph-daily-data .changes-data #changes-data-number {
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: #DD0323;
+      padding: 1rem 0;
+      margin: 0;
+      border-bottom: 1px solid rgba(177, 177, 177, 0.8); }
+    .graph-daily-data .changes-data #changes-data-percent {
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: #DD0323;
+      padding: 1rem 0;
+      margin: 0;
+      border-bottom: 1px solid rgba(177, 177, 177, 0.8); }
+    .graph-daily-data .changes-data #changes-data-last-value {
+      font-weight: 400;
+      font-size: 1.5rem;
+      padding: 1rem 0 0.5rem 0;
+      margin: 0; }
+    .graph-daily-data .changes-data #changes-data-last-value-date {
+      font-weight: 400;
+      font-size: 0.8rem;
+      margin: 0; }
+  .graph-daily-data .sources {
+    float: right;
+    right: 0;
+    bottom: 0;
+    margin: 2.5rem 2rem 0 0; }
+    .graph-daily-data .sources p {
+      font-size: 0.8rem;
+      font-weight: 400;
+      text-align: right;
+      letter-spacing: 0.05rem;
+      line-height: 0.5; }
+      .graph-daily-data .sources p a {
+        color: #252831; }
 
-.graph2 {
+.graph-donut {
   grid-row: 2/3;
   grid-column: 4/5;
   width: 450px; }
-  .graph2 .legend {
+  .graph-donut h1 {
+    color: #252831;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
+    text-align: center;
+    margin-top: 2rem;
+    z-index: 99; }
+  .graph-donut .source {
+    width: max-content;
+    float: right;
+    margin-top: -2rem; }
+    .graph-donut .source p {
+      font-size: 0.8rem;
+      font-weight: 400;
+      text-align: right;
+      margin-right: 2rem;
+      z-index: 99;
+      letter-spacing: 0.05rem; }
+      .graph-donut .source p a {
+        color: #252831; }
+  .graph-donut .legend {
     font-family: 'Roboto', sans-serif;
-    font-size: 12px;
+    font-size: 1rem;
     font-weight: 400; }
-  .graph2 rect {
+  .graph-donut rect {
     stroke-width: 2; }
 
 .graph3 {

@@ -3,8 +3,8 @@
 //Donut Chart
 // set the dimensions and margins of the graph
 var width = 450
-    height = 280
-    margin = 30
+    height = 250
+    margin = 10
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
 var radius = Math.min(width, height) / 2 - margin
 
@@ -15,9 +15,6 @@ var svg = d3.select("#donut")
             .attr("height", height)
             .append("g")
             .attr("transform", "translate(" + ((width / 2) - 100) + "," + height / 2 + ")");
-
-            
-            
 
 //Color
 var color = d3.scaleOrdinal()
@@ -100,8 +97,8 @@ d3.csv("data/world-sector.csv")
 })//closing tag for d3.csv
 
 //Legend
-var legendRectSize = 12;
-var legendSpacing = 4;
+var legendRectSize = 15;
+var legendSpacing = 5;
 
 var legend = svg.selectAll('.legend')
                 .data(color.domain())
@@ -111,59 +108,21 @@ var legend = svg.selectAll('.legend')
                 .attr('transform', function(d, i) {
                   var height = legendRectSize + legendSpacing;
                   var offset =  height * color.domain().length / 2;
-                  var horz = 10 * legendRectSize;
+                  var horz = 8 * legendRectSize;
                   var vert = i * height - offset;
                   return 'translate(' + horz + ',' + vert + ')';
 });
 
-
 legend.append('rect')
-  .attr('width', legendRectSize)
-  .attr('height', legendRectSize)
-  .style('fill', color)
-  .style('stroke', color);
+      .attr('width', legendRectSize)
+      .attr('height', legendRectSize)
+      .style('fill', color)
+      .style('stroke', color);
 
 legend.append('text')
-  .attr('x', legendRectSize + legendSpacing )
-  .attr('y', legendRectSize - legendSpacing)
-  .text(function(d) { return d; });
+      .attr('x', legendRectSize + legendSpacing )
+      .attr('y', legendRectSize - legendSpacing  + 1)
+      .text(function(d) { return d; });
 
+// ====== End of Donut Chart ======
 
-//End of Donut Chart
-
-
-  // Add the polylines between chart and labels:
-  // svg
-  //   .selectAll('allPolylines')
-  //   .data(data_ready)
-  //   .enter()
-  //   .append('polyline')
-  //     .attr("stroke", "black")
-  //     .style("fill", "none")
-  //     .attr("stroke-width", 1)
-  //     .attr('points', function(d) {
-  //       var posA = arc.centroid(d) // line insertion in the slice
-  //       var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
-  //       var posC = outerArc.centroid(d); // Label position = almost the same as posB
-  //       var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
-  //       posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
-  //       return [posA, posB, posC]
-  //     })
-
-  // Add the polylines between chart and labels:
-  // svg
-  //   .selectAll('allLabels')
-  //   .data(data_ready)
-  //   .enter()
-  //   .append('text')
-  //     .text( function(d) { console.log(d.data.key) ; return d.data.key } )
-  //     .attr('transform', function(d) {
-  //         var pos = outerArc.centroid(d);
-  //         var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-  //         pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
-  //         return 'translate(' + pos + ')';
-  //     })
-  //     .style('text-anchor', function(d) {
-  //         var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-  //         return (midangle < Math.PI ? 'start' : 'end')
-  //     })
