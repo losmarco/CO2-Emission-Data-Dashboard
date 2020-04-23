@@ -7,19 +7,17 @@ body {
   font-family: 'Nunito', sans-serif; }
 
 .container {
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1em;
   margin: 1em auto; }
 
-.main_graph {
-  grid-row: 1/4;
-  grid-column: 1/4; }
+.graph-line {
+  float: left; }
+
+.flex-container {
+  float: right;
+  display: flex;
+  flex-direction: column; }
 
 .graph-daily-data {
-  grid-row: 1/2;
-  grid-column: 4/5;
   width: 450px;
   height: 300px;
   position: relative; }
@@ -64,8 +62,8 @@ body {
           display: inline-block;
           margin: 0;
           color: #003059;
-          font-size: 3.5rem;
-          font-weight: 600; }
+          font-size: 4rem;
+          font-weight: 700; }
         .graph-daily-data .current-data .inner-circle #group #current-data-unit {
           display: inline-block;
           letter-spacing: 0.1rem;
@@ -115,7 +113,7 @@ body {
     float: right;
     right: 0;
     bottom: 0;
-    margin: 2.5rem 2rem 0 0; }
+    margin: 2rem 2rem 0 0; }
     .graph-daily-data .sources p {
       font-size: 0.8rem;
       font-weight: 400;
@@ -126,8 +124,6 @@ body {
         color: #252831; }
 
 .graph-donut {
-  grid-row: 2/3;
-  grid-column: 4/5;
   width: 450px; }
   .graph-donut h1 {
     color: #252831;
@@ -137,10 +133,12 @@ body {
     text-align: center;
     margin-top: 2rem;
     z-index: 99; }
+  .graph-donut svg {
+    margin-top: -2rem; }
   .graph-donut .source {
     width: max-content;
     float: right;
-    margin-top: -2rem; }
+    margin-top: -3rem; }
     .graph-donut .source p {
       font-size: 0.8rem;
       font-weight: 400;
@@ -157,9 +155,27 @@ body {
   .graph-donut rect {
     stroke-width: 2; }
 
-.graph3 {
-  grid-row: 3/4;
-  grid-column: 4/5; }
+.graph-treemap h1 {
+  color: #252831;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.05rem;
+  padding-left: 0.8rem;
+  margin-top: 1.5rem;
+  z-index: 99; }
+.graph-treemap .treemap {
+  margin-top: -1rem; }
+.graph-treemap rect {
+  fill: #003059; }
+.graph-treemap text .country {
+  font-size: 1.4rem;
+  fill: #ffffff; }
+.graph-treemap text .value {
+  font-size: 2.5rem;
+  fill: #f4f7fc; }
+.graph-treemap text .unit {
+  font-size: 1rem;
+  fill: #f4f7fc; }
 
 .card {
   background-color: #ffffff;
