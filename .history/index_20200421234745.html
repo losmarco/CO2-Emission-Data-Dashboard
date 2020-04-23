@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CO2 Emission Data Chart</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
+</head>
+<body>
+    <div class="container">
+
+        <div class="card graph-line">
+            <h2>CO2 Emission</h2>
+            <div class="main-graph"></div>
+        </div>
+        <div class="flex-container">
+            <div class="card graph-daily-data">
+                <h1>Daily CO2 Reading</h1>
+
+                <div class="current-data">
+                    <div class="inner-circle">
+                        <div id="group">
+                            <h2 id="current-data-value"></h2>
+                            <h4 id="current-data-unit">ppm</h4>
+                            <h3 id="current-data-date"></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="changes-data">
+                    <div class="child">
+                        <h3 id="changes-data-number"></h3>
+                    </div>
+                    <div class="child">
+                        <h3 id="changes-data-percent"></h3>
+                    </div> 
+                    <div class="child">
+                        <h3 id="changes-data-last-value"></h3>
+                        <h3 id="changes-data-last-value-date"></h3>
+                    </div>
+                </div>
+                
+                <div class="sources">
+                    
+                    <p>Source: <a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/monthly.html">NOAA.GOV</a></p>
+                    <p id="source-last-update-date"></p>
+                    <p>Location: Mauna Loa Obervatory</p>
+                </div>
+            </div>     
+            
+            <div class="card graph-donut">
+                <h1>World CO2 Emissions by Sector(2015)</h1>   
+                <div id="donut"></div>
+                <div class="source">
+                    <p>Source: <a href="https://www.iea.org/subscribe-to-data-services/co2-emissions-statistics" target="_blank">IEA</a></p>
+                </div>
+            </div>
+
+            <div class="card graph-treemap">
+                <h1>Highest emissions per capita</h1>
+                <div id="my_dataviz"></div>
+                <!-- <div class="treemap"></div> -->
+            </div>
+        </div>
+    </div>
+</body>
+    <!-- <script src="javascript/main.js"></script> -->
+    <script src="javascript/dailyreading.js"></script>
+    <script src="javascript/donut.js"></script>
+    <!-- <script src="javascript/treemap.js"></script> -->
+    <script src="javascript/test.js"></script>
+</html>
