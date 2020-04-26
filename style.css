@@ -1,39 +1,199 @@
-/*
-Error: Invalid CSS after "@import ": expected "{", was "url('https://fo..."
-        on line 3 of F:\CO2-Emission-Data-Dashboard\style.scss
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap");
+html {
+  font-size: 12px; }
 
-1: <<<<<<< HEAD
-2: //Google Font
-3: @import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap');
-4: 
-5: // Font
-6: @mixin header{
-7:     font-weight: 700;
-8:     font-size: 1.5rem;
+body {
+  background: #f4f7fc;
+  font-family: 'Nunito', sans-serif; }
 
-Backtrace:
-F:\CO2-Emission-Data-Dashboard\style.scss:3
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1278:in `expected'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1208:in `expected'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1203:in `tok!'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:677:in `block'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:670:in `ruleset'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:696:in `block_child'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:686:in `block_contents'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:137:in `stylesheet'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:41:in `parse'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:414:in `_to_tree'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:307:in `render_with_sourcemap'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:391:in `run'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:63:in `process_result'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:52:in `parse'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:19:in `parse!'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/bin/sass:13:in `<top (required)>'
-C:/Program Files (x86)/Koala/bin/sass:22:in `load'
-C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"@import \": expected \"{\", was \"url('https://fo...\"\A         on line 3 of F:\CO2-Emission-Data-Dashboard\style.scss\A \A 1: <<<<<<< HEAD\A 2: //Google Font\A 3: @import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap');\A 4: \A 5: // Font\A 6: @mixin header{\A 7:     font-weight: 700;\A 8:     font-size: 1.5rem;"; }
+.container {
+  margin: 1em auto;
+  display: grid;
+  grid-template-columns: 5, 1fr;
+  grid-template-rows: 5, 1fr;
+  gap: 0.5em 0.5em;
+  grid-template-areas: "line line line tree tree"  "line line line tree tree"  "line line line tree tree"  "flex flex flex tree tree"  "flex flex flex tree tree"; }
+  .container .graph-line {
+    grid-area: line; }
+  .container .flex-container {
+    grid-area: flex; }
+  .container .graph-treemap {
+    grid-area: tree; }
+
+.graph-line h2 {
+  text-align: center; }
+.graph-line .grid {
+  color: rgba(0, 0, 0, 0.2); }
+
+.flex-container {
+  float: right;
+  display: flex;
+  flex-direction: row; }
+
+.graph-daily-data {
+  width: 450px;
+  height: 300px;
+  position: relative; }
+  .graph-daily-data h1 {
+    float: right;
+    color: #252831;
+    width: 40%;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
+    text-align: center;
+    margin: 3rem .5rem 0 0; }
+  .graph-daily-data .current-data {
+    float: left;
+    background: #ffffff;
+    position: relative;
+    display: block;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: solid 2px rgba(27, 88, 201, 0.7);
+    box-sizing: border-box;
+    margin: 2.5rem 0 0 1rem;
+    text-align: center; }
+    .graph-daily-data .current-data .inner-circle {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: #e7f2fe;
+      box-sizing: border-box;
+      top: 50%;
+      left: 50%;
+      margin-top: -110px;
+      margin-left: -110px; }
+      .graph-daily-data .current-data .inner-circle #group {
+        padding-top: 6rem;
+        padding-left: 1rem; }
+        .graph-daily-data .current-data .inner-circle #group #current-data-value {
+          display: inline-block;
+          margin: 0;
+          color: #003059;
+          font-size: 4rem;
+          font-weight: 700; }
+        .graph-daily-data .current-data .inner-circle #group #current-data-unit {
+          display: inline-block;
+          letter-spacing: 0.1rem;
+          margin: 0;
+          width: max-content;
+          color: #003059;
+          font-size: 1rem;
+          font-weight: 400; }
+      .graph-daily-data .current-data .inner-circle #current-data-date {
+        letter-spacing: 0.05rem;
+        color: #252831;
+        font-size: 1.2rem;
+        font-weight: 400; }
+  .graph-daily-data .changes-data {
+    float: right;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    margin-right: 3.8rem;
+    margin-top: 1rem; }
+    .graph-daily-data .changes-data .child {
+      text-align: center; }
+    .graph-daily-data .changes-data #changes-data-number {
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: #DD0323;
+      padding: 1rem 0;
+      margin: 0;
+      border-bottom: 1px solid rgba(177, 177, 177, 0.8); }
+    .graph-daily-data .changes-data #changes-data-percent {
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: #DD0323;
+      padding: 1rem 0;
+      margin: 0;
+      border-bottom: 1px solid rgba(177, 177, 177, 0.8); }
+    .graph-daily-data .changes-data #changes-data-last-value {
+      font-weight: 400;
+      font-size: 1.5rem;
+      padding: 1rem 0 0.5rem 0;
+      margin: 0; }
+    .graph-daily-data .changes-data #changes-data-last-value-date {
+      font-weight: 400;
+      font-size: 0.8rem;
+      margin: 0; }
+  .graph-daily-data .sources {
+    float: right;
+    right: 0;
+    bottom: 0;
+    margin: 2rem 2rem 0 0; }
+    .graph-daily-data .sources p {
+      font-size: 0.8rem;
+      font-weight: 400;
+      text-align: right;
+      letter-spacing: 0.05rem;
+      line-height: 0.5; }
+      .graph-daily-data .sources p a {
+        color: #252831; }
+
+.graph-donut {
+  margin-left: 1em; }
+  .graph-donut h1 {
+    color: #252831;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
+    text-align: center;
+    margin-top: 2rem;
+    z-index: 99; }
+  .graph-donut svg {
+    margin-top: -2rem; }
+  .graph-donut .source {
+    width: max-content;
+    float: right;
+    margin-top: -3rem; }
+    .graph-donut .source p {
+      font-size: 0.8rem;
+      font-weight: 400;
+      text-align: right;
+      margin-right: 2rem;
+      z-index: 99;
+      letter-spacing: 0.05rem; }
+      .graph-donut .source p a {
+        color: #252831; }
+  .graph-donut .legend {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 400; }
+  .graph-donut rect {
+    stroke-width: 2; }
+
+.graph-treemap h1 {
+  color: #252831;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.05rem;
+  padding-left: 0.8rem;
+  margin-top: 1.5rem;
+  z-index: 99; }
+.graph-treemap .treemap {
+  margin-top: -1rem; }
+.graph-treemap rect {
+  fill: #003059; }
+.graph-treemap text .country {
+  font-size: 1.4rem;
+  fill: #ffffff; }
+.graph-treemap text .value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  fill: #f4f7fc; }
+.graph-treemap text .unit {
+  font-size: 1rem;
+  fill: #f4f7fc; }
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.06); }
+
+/*# sourceMappingURL=style.css.map */
