@@ -1,199 +1,372 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap");
 html {
-  font-size: 12px; }
+  font-size: 12px;
+}
 
 body {
-  background: #f4f7fc;
-  font-family: 'Nunito', sans-serif; }
+  background: #f5f7f9;
+  font-family: 'Nunito', sans-serif;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
 
 .container {
   margin: 1em auto;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 5, 1fr;
-  grid-template-rows: 5, 1fr;
-  gap: 0.5em 0.5em;
-  grid-template-areas: "line line line tree tree"  "line line line tree tree"  "line line line tree tree"  "flex flex flex tree tree"  "flex flex flex tree tree"; }
-  .container .graph-line {
-    grid-area: line; }
-  .container .flex-container {
-    grid-area: flex; }
-  .container .graph-treemap {
-    grid-area: tree; }
+  -ms-grid-columns: 5, 1fr;
+      grid-template-columns: 5, 1fr;
+  -ms-grid-rows: 5, 1fr;
+      grid-template-rows: 5, 1fr;
+  gap: 1rem;
+      grid-template-areas: "tree tree flex flex flex"  "tree tree flex flex flex" "tree tree line line line"  "tree tree line line line"  "tree tree line line line";
+}
+
+.container .graph-line {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+  grid-area: line;
+}
+
+.container .flex-container {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+  grid-area: flex;
+}
+
+.container .graph-treemap {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: tree;
+}
 
 .graph-line h2 {
-  text-align: center; }
+  padding-top: 1rem;
+  padding-left: 7rem;
+  font-size: 1.6rem;
+  letter-spacing: 0.1rem;
+}
+
+.graph-line .x-axis, .graph-line .y-axis {
+  color: #252831;
+  opacity: 0.8;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.graph-line .x-axis line {
+  opacity: 0;
+}
+
+.graph-line .y-axis line {
+  opacity: 0;
+}
+
 .graph-line .grid {
-  color: rgba(0, 0, 0, 0.2); }
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.graph-line .overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.graph-line .tooltip circle {
+  fill: #003059;
+}
+
+.graph-line .tooltip {
+  fill: #003059;
+  position: absolute;
+  text-align: center;
+  pointer-events: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.graph-line .tooltip-time,
+.graph-line .tooltip-value {
+  fill: #ffffff;
+  font-size: 1.1rem;
+}
 
 .flex-container {
   float: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row; }
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
 
 .graph-daily-data {
-  width: 450px;
-  height: 300px;
-  position: relative; }
-  .graph-daily-data h1 {
-    float: right;
-    color: #252831;
-    width: 40%;
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: 0.05rem;
-    text-align: center;
-    margin: 3rem .5rem 0 0; }
-  .graph-daily-data .current-data {
-    float: left;
-    background: #ffffff;
-    position: relative;
-    display: block;
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    border: solid 2px rgba(27, 88, 201, 0.7);
-    box-sizing: border-box;
-    margin: 2.5rem 0 0 1rem;
-    text-align: center; }
-    .graph-daily-data .current-data .inner-circle {
-      content: "";
-      position: absolute;
-      display: block;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: #e7f2fe;
-      box-sizing: border-box;
-      top: 50%;
-      left: 50%;
-      margin-top: -110px;
-      margin-left: -110px; }
-      .graph-daily-data .current-data .inner-circle #group {
-        padding-top: 6rem;
-        padding-left: 1rem; }
-        .graph-daily-data .current-data .inner-circle #group #current-data-value {
-          display: inline-block;
-          margin: 0;
-          color: #003059;
-          font-size: 4rem;
-          font-weight: 700; }
-        .graph-daily-data .current-data .inner-circle #group #current-data-unit {
-          display: inline-block;
-          letter-spacing: 0.1rem;
-          margin: 0;
-          width: max-content;
-          color: #003059;
-          font-size: 1rem;
-          font-weight: 400; }
-      .graph-daily-data .current-data .inner-circle #current-data-date {
-        letter-spacing: 0.05rem;
-        color: #252831;
-        font-size: 1.2rem;
-        font-weight: 400; }
-  .graph-daily-data .changes-data {
-    float: right;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    margin-right: 3.8rem;
-    margin-top: 1rem; }
-    .graph-daily-data .changes-data .child {
-      text-align: center; }
-    .graph-daily-data .changes-data #changes-data-number {
-      font-weight: 400;
-      font-size: 1.5rem;
-      color: #DD0323;
-      padding: 1rem 0;
-      margin: 0;
-      border-bottom: 1px solid rgba(177, 177, 177, 0.8); }
-    .graph-daily-data .changes-data #changes-data-percent {
-      font-weight: 400;
-      font-size: 1.5rem;
-      color: #DD0323;
-      padding: 1rem 0;
-      margin: 0;
-      border-bottom: 1px solid rgba(177, 177, 177, 0.8); }
-    .graph-daily-data .changes-data #changes-data-last-value {
-      font-weight: 400;
-      font-size: 1.5rem;
-      padding: 1rem 0 0.5rem 0;
-      margin: 0; }
-    .graph-daily-data .changes-data #changes-data-last-value-date {
-      font-weight: 400;
-      font-size: 0.8rem;
-      margin: 0; }
-  .graph-daily-data .sources {
-    float: right;
-    right: 0;
-    bottom: 0;
-    margin: 2rem 2rem 0 0; }
-    .graph-daily-data .sources p {
-      font-size: 0.8rem;
-      font-weight: 400;
-      text-align: right;
-      letter-spacing: 0.05rem;
-      line-height: 0.5; }
-      .graph-daily-data .sources p a {
-        color: #252831; }
+  width: 495px;
+  height: 310px;
+  position: relative;
+}
+
+.graph-daily-data h1 {
+  float: right;
+  color: #252831;
+  width: 40%;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  margin: 3rem .5rem 0 0;
+}
+
+.graph-daily-data .current-data {
+  float: left;
+  background: #ffffff;
+  position: relative;
+  display: block;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: solid 2px rgba(27, 88, 201, 0.7);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 2.5rem 0 0 1rem;
+  text-align: center;
+}
+
+.graph-daily-data .current-data .inner-circle {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: #e7f2fe;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  margin-top: -110px;
+  margin-left: -110px;
+}
+
+.graph-daily-data .current-data .inner-circle #group {
+  padding-top: 6rem;
+  padding-left: 1rem;
+}
+
+.graph-daily-data .current-data .inner-circle #group #current-data-value {
+  display: inline-block;
+  margin: 0;
+  color: #003059;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.graph-daily-data .current-data .inner-circle #group #current-data-unit {
+  display: inline-block;
+  letter-spacing: 0.1rem;
+  margin: 0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  color: #003059;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.graph-daily-data .current-data .inner-circle #current-data-date {
+  letter-spacing: 0.05rem;
+  color: #252831;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.graph-daily-data .changes-data {
+  float: right;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-right: 3.8rem;
+  margin-top: 1rem;
+}
+
+.graph-daily-data .changes-data .child {
+  text-align: center;
+}
+
+.graph-daily-data .changes-data #changes-data-number {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #DD0323;
+  padding: 1rem 0;
+  margin: 0;
+  border-bottom: 1px solid rgba(177, 177, 177, 0.8);
+}
+
+.graph-daily-data .changes-data #changes-data-percent {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #DD0323;
+  padding: 1rem 0;
+  margin: 0;
+  border-bottom: 1px solid rgba(177, 177, 177, 0.8);
+}
+
+.graph-daily-data .changes-data #changes-data-last-value {
+  font-weight: 400;
+  font-size: 1.5rem;
+  padding: 1rem 0 0.5rem 0;
+  margin: 0;
+}
+
+.graph-daily-data .changes-data #changes-data-last-value-date {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.graph-daily-data .sources {
+  float: right;
+  right: 0;
+  bottom: 0;
+  margin: 2rem 0.5rem 0 0;
+}
+
+.graph-daily-data .sources p {
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: right;
+  letter-spacing: 0.08rem;
+  line-height: 0.5;
+}
+
+.graph-daily-data .sources p a {
+  color: #252831;
+}
 
 .graph-donut {
-  margin-left: 1em; }
-  .graph-donut h1 {
-    color: #252831;
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: 0.05rem;
-    text-align: center;
-    margin-top: 2rem;
-    z-index: 99; }
-  .graph-donut svg {
-    margin-top: -2rem; }
-  .graph-donut .source {
-    width: max-content;
-    float: right;
-    margin-top: -3rem; }
-    .graph-donut .source p {
-      font-size: 0.8rem;
-      font-weight: 400;
-      text-align: right;
-      margin-right: 2rem;
-      z-index: 99;
-      letter-spacing: 0.05rem; }
-      .graph-donut .source p a {
-        color: #252831; }
-  .graph-donut .legend {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    font-weight: 400; }
-  .graph-donut rect {
-    stroke-width: 2; }
+  margin-left: 1em;
+}
+
+.graph-donut h1 {
+  color: #252831;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  margin-top: 2rem;
+  z-index: 99;
+}
+
+.graph-donut svg {
+  margin-top: -2rem;
+}
+
+.graph-donut .tooltip {
+  background: #003059;
+  position: absolute;
+  text-align: center;
+  padding: .5rem;
+  color: #ffffff;
+  border-radius: 4px;
+  pointer-events: none;
+  font-size: 1.3rem;
+}
+
+.graph-donut .source {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  float: right;
+  margin-top: -2rem;
+}
+
+.graph-donut .source p {
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: right;
+  margin-right: 2rem;
+  letter-spacing: 0.08rem;
+}
+
+.graph-donut .source p a {
+  color: #252831;
+}
+
+.graph-donut .legend {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.graph-donut rect {
+  stroke-width: 2;
+}
 
 .graph-treemap h1 {
   color: #252831;
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: 0.05rem;
-  padding-left: 0.8rem;
+  padding-left: 0.9rem;
+  padding-bottom: 1rem;
   margin-top: 1.5rem;
-  z-index: 99; }
+  z-index: 99;
+}
+
 .graph-treemap .treemap {
-  margin-top: -1rem; }
+  margin-top: -1rem;
+}
+
 .graph-treemap rect {
-  fill: #003059; }
+  fill: #06244a;
+}
+
 .graph-treemap text .country {
   font-size: 1.4rem;
-  fill: #ffffff; }
+  fill: #ffffff;
+}
+
 .graph-treemap text .value {
   font-size: 2.5rem;
   font-weight: 700;
-  fill: #f4f7fc; }
+  fill: #f5f7f9;
+}
+
 .graph-treemap text .unit {
+  font-size: 1.2rem;
+  fill: #ffffff;
+  letter-spacing: 0.04rem;
+}
+
+.graph-treemap .source {
+  float: right;
+  padding-right: 1rem;
+}
+
+.graph-treemap .source p {
   font-size: 1rem;
-  fill: #f4f7fc; }
+  font-weight: 400;
+  letter-spacing: 0.08rem;
+}
 
-.card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.06); }
-
+.graph-treemap .source p a {
+  color: #252831;
+}
 /*# sourceMappingURL=style.css.map */

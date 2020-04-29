@@ -13,7 +13,7 @@
 }
 
 // Color
-$background-white:#f5f7f9;
+$background-white:#f4f7fc;
 $white: #ffffff;
 $grey: #828f95;
 $light-grey: #B1B8C0;
@@ -40,24 +40,18 @@ body{
     font-family: 'Nunito', sans-serif;
     
 }
-.card{
-    @include card-background;
-   
-}
 
 .container{
     margin: 1em auto;
     display: grid;
     grid-template-columns: (5, 1fr);
     grid-template-rows: (5, 1fr);
-    gap: 1rem;
-    grid-template-areas: "tree tree flex flex flex" 
-                         "tree tree flex flex flex"
-                         "tree tree line line line" 
-                         "tree tree line line line" 
-                         "tree tree line line line" 
-                         
-                         ;
+    gap: 0.5em 0.5em;
+    grid-template-areas: "line line line tree tree" 
+                         "line line line tree tree" 
+                         "line line line tree tree" 
+                         "flex flex flex tree tree" 
+                         "flex flex flex tree tree";
 
     .graph-line {grid-area: line;}
     .flex-container {grid-area: flex;}
@@ -67,57 +61,11 @@ body{
 
 //============== Line Chart =================  
 .graph-line{
-
     h2{
-        padding-top: 1rem;
-        padding-left: 7rem;
-        font-size: 1.6rem;
-        letter-spacing: 0.1rem;
-    }
-    .x-axis, .y-axis{
-        color: $black;
-        opacity:0.8;
-        font-weight: 400;
-        font-size: 12px;
-        
-    }
-    .x-axis{
-        line{
-            opacity: 0;
-        }
-    }
-    .y-axis{
-        line{
-            opacity: 0;
-        }
+        text-align: center;
     }
     .grid{
         color: rgba(0,0,0,0.2);
-    }
- 
-    .overlay {
-        fill: none;
-        pointer-events: all;
-    }
-    .tooltip circle {
-        fill: $blue;
-    }
-    
-    .tooltip{
-        fill: $blue;
-        position: absolute;
-        text-align: center;
-        pointer-events: none;
-        transition: all 0.3s;
-        
-    }
-
-
-    .tooltip-time, 
-    .tooltip-value{
-        fill:$white;
-        font-size: 1.1rem;
-        
     }
 }
 
@@ -129,8 +77,8 @@ body{
 
 //============== Daily Reading Graph =================  
 .graph-daily-data{
-    width: 495px;
-    height: 310px;
+    width: 450px;
+    height: 300px;
     position: relative;
     
     h1{
@@ -193,8 +141,10 @@ body{
                 }
             }
             #current-data-date{
+                // text-align:center;
                 letter-spacing: 0.05rem;
                 color: $black;
+                // opacity:0.8;
                 font-size:1.2rem;
                 font-weight: 400;
             }
@@ -208,7 +158,12 @@ body{
         flex-direction: column;
         margin-right: 3.8rem;
         margin-top:1rem;
-        .child{text-align: center;}
+        .child{
+            text-align: center;
+            // &:last-child{
+            //     background:$light-blue;
+            // }
+        }
     
         #changes-data-number{
             font-weight: 400;
@@ -245,13 +200,13 @@ body{
         right: 0;
         bottom: 0;
         
-        margin: 2rem 0.5rem 0 0;
+        margin: 2rem 2rem 0 0;
         
         p{
-            font-size:1rem;
+            font-size:0.8rem;
             font-weight:400;
             text-align: right;
-            letter-spacing: 0.08rem;
+            letter-spacing: 0.05rem;
             line-height: 0.5;
             a{color: $black;}
         }
@@ -271,27 +226,22 @@ body{
     svg{
         margin-top:-2rem;
     }
-    .tooltip{
-        background: $blue;
-        position: absolute;
-        text-align: center;
-        padding: .5rem;
-        color: $white;
-        border-radius: 4px;
-        pointer-events: none;
-        font-size: 1.3rem;
-    }
     .source{
         width:max-content;
         float:right;
-        margin-top: -2rem;
+        margin-top: -3rem;
         p{
-            font-size:1rem;
+            font-size:0.8rem;
             font-weight:400;
             text-align: right;
             margin-right: 2rem;
-            letter-spacing: 0.08rem;
-            a{color: $black;}
+            
+            z-index:99;
+            // top: 2rem;
+            letter-spacing: 0.05rem;
+            a{
+                color: $black;
+            }
     }
     
     }
@@ -306,14 +256,13 @@ body{
 
     
 }
-//============== Treemap ================= 
+//============== Third Graph ================= 
 .graph-treemap{  
 
     h1{
         color: $black;
         @include header;
-        padding-left: 0.9rem;
-        padding-bottom: 1rem;
+        padding-left: 0.8rem;
         margin-top: 1.5rem;
         z-index:99;
     }
@@ -322,10 +271,9 @@ body{
         
     }
     rect{
-        fill: #06244a;
+        fill: $blue;
     }
     text{
-        
         .country{
             font-size: 1.4rem;
             fill: $white;
@@ -336,23 +284,13 @@ body{
             fill: $background-white;
         }
         .unit{
-            font-size: 1.2rem;
-            fill: $white;
-            letter-spacing: 0.04rem;
-        }
-    }
-    .source{
-        float: right;
-        padding-right: 1rem;
-        p{
-            font-size:1rem;
-            font-weight:400;                
-            letter-spacing: 0.08rem;
-            a{
-                color: $black;
-            }
+            font-size: 1rem;
+            fill: $background-white;
         }
     }
 }
 
-
+.card{
+    @include card-background;
+   
+}
