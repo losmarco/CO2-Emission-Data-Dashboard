@@ -1,29 +1,30 @@
+//( ͡° ͜ʖ ͡°)
+//Donut Chart
+// set the dimensions and margins of the graph
+var donutWidth = 495
+    donutHeight = 250
+    donutMargin = 10
+// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+var radius = Math.min(donutWidth, donutHeight) / 2 - donutMargin;
 
-var width = 450
-    height = 250
-    margin = 10
-
-var radius = Math.min(width, height) / 2 - margin
-
-var svg = d3.select("#donut")
+//append the svg object to the div called 'donut'
+var donutSvg = d3.select("#donut")
             .append("svg")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", donutWidth)
+            .attr("height", donutHeight)
             .append("g")
-            .attr("transform", "translate(" + ((width / 2) - 100) + "," + height / 2 + ")");
+            .attr("transform", "translate(" + ((donutWidth / 2) - 100) + "," + donutHeight / 2 + ")");
 
 //Color
-var color = d3.scaleOrdinal()
+var donutColor = d3.scaleOrdinal()
 .domain(["Agriculture", 
         "Commercial And Public Services", 
         "Electricity And Heat Producers", 
-        "Final Consumption", 
-        "Fishing", 
         "Industry", 
         "Other Energy Industries", 
         "Residential",
         "Transport"])
-.range(d3.schemeDark2);
+.range(["#ffa600", "#ff7c43", "#f95d6a", "#d45087", "#a05195", "#665191", "#2f4b7c"]);
 
 d3.csv("data/world-sector.csv")
   .then(function(csvdata){
@@ -59,8 +60,6 @@ d3.csv("data/world-sector.csv")
   var data = {"Agriculture": agri,
               "Commercial And Public Services": cap,
               "Electricity And Heat Producers": eahp,
-              "Final Consumption":fcnes ,
-              "Fishing": fishing,
               "Industry":industry,
               "Other Energy Industries": oei,
               "Residential":residential,
@@ -76,49 +75,57 @@ d3.csv("data/world-sector.csv")
   // The arc generator + hole size
   var arc = d3.arc()
     .innerRadius(radius * 0.45)         
-    .outerRadius(radius * 0.8)
+    .outerRadius(radius * 0.9)
 
   // Build the pie chart
-  svg.selectAll('allSlices')
+  donutSvg.selectAll('allSlices')
       .data(data_ready)
       .enter()
       .append('path')
       .attr('d', arc)
-      .attr('fill', function(d){ return(color(d.data.key)) })
+      .attr('fill', function(d,i){ return(donutColor(d.data.key)) })
       .attr("stroke", "white")
-      .style("stroke-width", "1px")
+      .style("stroke-width", "2px")
       .style("opacity", 1)
       
+      .on('mouseover', function() {
+        d3.select(this).transition()
+             .duration('.50')
+             .attr('opacity', '.85')});
+             //donutSvg.on('mouseout', function (d, i) {
+        // d3.select(this).transition()
+        //      .duration('50')
+        //      .attr('opacity', '1');
 
-})//closing tag for d3.csv
+
 
 //Legend
 var legendRectSize = 15;
-var legendSpacing = 5;
+var legendSpacing = 8;
 
-var legend = svg.selectAll('.legend')
-                .data(color.domain())
+var legend = donutSvg.selectAll('.legend')
+                .data(donutColor.domain())
                 .enter()
                 .append('g')
                 .attr('class', 'legend')
                 .attr('transform', function(d, i) {
                   var height = legendRectSize + legendSpacing;
-                  var offset =  height * color.domain().length / 2;
-                  var horz = 8 * legendRectSize;
-                  var vert = i * height - offset;
+                  var offset =  height * donutColor.domain().length / 2;
+                  var horz = 9 * legendRectSize;
+                  var vert = i * height - offset + 5;
                   return 'translate(' + horz + ',' + vert + ')';
 });
 
 legend.append('rect')
       .attr('width', legendRectSize)
       .attr('height', legendRectSize)
-      .style('fill', color)
-      .style('stroke', color);
+      .style('fill', donutColor)
+      .style('stroke', donutColor);
 
 legend.append('text')
       .attr('x', legendRectSize + legendSpacing )
-      .attr('y', legendRectSize - legendSpacing  + 1)
+      .attr('y', legendRectSize - legendSpacing  + 4.6)
       .text(function(d) { return d; });
 
-// ====== End of Donut Chart ======
 
+})

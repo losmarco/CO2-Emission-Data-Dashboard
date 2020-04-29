@@ -1,0 +1,316 @@
+//Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap');
+
+// Font
+@mixin header{
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
+}
+@mixin text{
+    font-weight: 500;
+    font-size: 12px;
+}
+
+// Color
+$background-white:#f4f7fc;
+$white: #ffffff;
+$grey: #828f95;
+$light-grey: #B1B8C0;
+$black: #252831;
+$purple: #7b43a1;
+$orange: #ff9824;
+$pink: #f2317a;
+$red:#DD0323;
+$blue: #003059;
+$light-blue: #e7f2fe;
+$primary-green:#58cf6c;
+$secondary-green: #43a19e;
+
+//Card
+@mixin card-background{
+    background-color: $white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.06);
+}
+html{font-size: 12px;}
+
+body{
+    background: $background-white;
+    font-family: 'Nunito', sans-serif;
+    
+}
+
+.container{
+    margin: 1em auto;
+    display: grid;
+    grid-template-columns: (5, 1fr);
+    grid-template-rows: (5, 1fr);
+    gap: 0.5em 0.5em;
+    grid-template-areas: "line line line tree tree" 
+                         "line line line tree tree" 
+                         "line line line tree tree" 
+                         "flex flex flex tree tree" 
+                         "flex flex flex tree tree";
+
+    .graph-line {grid-area: line;}
+    .flex-container {grid-area: flex;}
+    .graph-treemap {grid-area: tree;}
+}
+
+
+//============== Line Chart =================  
+.graph-line{
+
+    h2{
+        text-align: center;
+        font-size: 1.5rem;
+        letter-spacing: 0.2rem;
+    }
+    .x-axis, .y-axis{
+        color: $black;
+        opacity:0.8;
+        font-weight: 400;
+        font-size: 12px;
+        
+    }
+    .x-axis{
+        line{
+            opacity: 0;
+        }
+    }
+    .y-axis{
+        line{
+            opacity: 0;
+        }
+    }
+    .grid{
+        color: rgba(0,0,0,0.2);
+    }
+}
+
+.flex-container{
+    float:right;
+    display:flex;
+    flex-direction: row;
+}
+
+//============== Daily Reading Graph =================  
+.graph-daily-data{
+    width: 450px;
+    height: 300px;
+    position: relative;
+    
+    h1{
+        float:right;
+        color: $black;
+        width:40%;
+        @include header;
+        text-align: center;
+        margin:3rem .5rem 0 0;
+    }
+
+    .current-data{
+        float:left;
+        background:$white;
+        position: relative; // pushes down the content
+        display:block;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        border: solid 2px rgba(27, 88, 201, 0.7);
+        box-sizing: border-box;
+        margin: 2.5rem 0 0 1rem;
+        text-align:center;
+
+        .inner-circle{
+            content:"";
+            position: absolute;
+            display: block;
+            width: 220px;
+            height:220px;
+            border-radius: 50%;
+            background: $light-blue;
+            box-sizing: border-box;
+            top: 50%;
+            left: 50%;
+            margin-top: -110px;
+            margin-left: -110px;
+            
+            #group{
+                padding-top: 6rem;
+                padding-left:1rem;
+
+            
+                #current-data-value{
+                    display:inline-block;
+                    margin:0;
+                    color: $blue;
+                    font-size: 4rem;
+                    font-weight: 700;
+                }
+
+                #current-data-unit{
+                    display:inline-block;
+                    letter-spacing: 0.1rem;
+                    margin:0;
+                    width: max-content;
+                    color: $blue;
+                    font-size: 1rem;
+                    font-weight:400;
+                }
+            }
+            #current-data-date{
+                // text-align:center;
+                letter-spacing: 0.05rem;
+                color: $black;
+                // opacity:0.8;
+                font-size:1.2rem;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .changes-data{
+        float:right;
+        top: 0;
+        display:flex;
+        flex-direction: column;
+        margin-right: 3.8rem;
+        margin-top:1rem;
+        .child{
+            text-align: center;
+            // &:last-child{
+            //     background:$light-blue;
+            // }
+        }
+    
+        #changes-data-number{
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: $red;
+            padding: 1rem 0;
+            margin: 0;
+            border-bottom: 1px solid rgba(177, 177, 177, 0.8);
+        }
+        #changes-data-percent{
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: $red;
+            padding: 1rem 0;
+            margin: 0;
+            border-bottom: 1px solid rgba(177, 177, 177, 0.8);
+        }
+        #changes-data-last-value{
+            font-weight: 400;
+            font-size: 1.5rem;
+            padding:1rem 0 0.5rem 0;
+            margin: 0;
+        }
+        #changes-data-last-value-date{
+            font-weight: 400;
+            font-size: 0.8rem;
+            margin:0;
+            
+        }
+    
+    }
+    .sources{
+        float:right;
+        right: 0;
+        bottom: 0;
+        
+        margin: 2rem 2rem 0 0;
+        
+        p{
+            font-size:0.8rem;
+            font-weight:400;
+            text-align: right;
+            letter-spacing: 0.05rem;
+            line-height: 0.5;
+            a{color: $black;}
+        }
+    }
+}
+//============== Donut Graph ================= 
+.graph-donut{
+    margin-left: 1em;
+    
+    h1{
+        color: $black;
+        @include header;
+        text-align: center;
+        margin-top: 2rem;
+        z-index:99;
+    }
+    svg{
+        margin-top:-2rem;
+    }
+    .source{
+        width:max-content;
+        float:right;
+        margin-top: -3rem;
+        p{
+            font-size:0.8rem;
+            font-weight:400;
+            text-align: right;
+            margin-right: 2rem;
+            
+            z-index:99;
+            // top: 2rem;
+            letter-spacing: 0.05rem;
+            a{
+                color: $black;
+            }
+    }
+    
+    }
+    .legend {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        font-weight:400;
+    }
+    rect {
+        stroke-width: 2;
+    }
+
+    
+}
+//============== Third Graph ================= 
+.graph-treemap{  
+
+    h1{
+        color: $black;
+        @include header;
+        padding-left: 0.8rem;
+        margin-top: 1.5rem;
+        z-index:99;
+    }
+    .treemap{
+        margin-top:-1rem;
+        
+    }
+    rect{
+        fill: $blue;
+    }
+    text{
+        .country{
+            font-size: 1.4rem;
+            fill: $white;
+        }
+        .value{
+            font-size: 2.5rem;
+            font-weight: 700;
+            fill: $background-white;
+        }
+        .unit{
+            font-size: 1rem;
+            fill: $background-white;
+        }
+    }
+}
+
+.card{
+    @include card-background;
+   
+}
