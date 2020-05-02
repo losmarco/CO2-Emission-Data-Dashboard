@@ -35,17 +35,12 @@ d3.csv("data/co2-emission-1970-2012new.csv")
     countrytop.unshift({countryName: "Origin", parent: ""});
     // console.log(countrytop);
     
-    
-
-    // stratify the data: reformatting for d3.js
     var root = d3.stratify()
-    .id(function(d) { return d.countryName; })   // Name of the entity (column name is name in csv)
-    .parentId(function(d) { return d.parent; })   // Name of the parent (column name is parent in csv)
+    .id(function(d) { return d.countryName; })   
+    .parentId(function(d) { return d.parent; })   
     (countrytop);
-    root.sum(function(d) { return +d.latestYear })   // Compute the numeric value for each entity
+    root.sum(function(d) { return +d.latestYear }) 
 
-    // Then d3.treemap computes the position of each element of the hierarchy
-    // The coordinates are added to the root object above
     var treemap = d3.treemap()
                     .size([treeWidth, treeHeight])
                     .padding(2);
@@ -58,14 +53,22 @@ d3.csv("data/co2-emission-1970-2012new.csv")
                       .data(root.leaves())
                       .enter().append("g")
                       .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; });
-
-  
+    
+    treecolor = d3.scaleLinear()
+      .domain(root.leaves().map( d => {return d.data.latestYear}))
+      .range ([]);
+      
 
     cell.append("rect")
         .attr('width', d => d.x1 - d.x0 )
-        .attr('height', d => d.y1 - d.y0 );
+        .attr('height', d => d.y1 - d.y0 )
+        .attr("fill", d => { return treecolor(d.parent.value) })
+        .attr("opacity", d => { 
+          let min = d3.min(root.leaves().map(leaf => leaf.value))
+          let max = d3.max(root.leaves().map(leaf => leaf.value))
+          return (d.value + 5)/(max-min)  
+        });
         
-
     var text = cell.append("text")
                    .attr("x", 5)    
                    .attr("y", 20);
