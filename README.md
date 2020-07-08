@@ -1,5 +1,5 @@
 # CO2-Emission-Data-Dashboard
-An expirement project with data visualization tool[d3.js](https://github.com/d3/d3)
+An expirement project with data visualization tool [d3.js](https://github.com/d3/d3)
 
 ![CO2](screenshot.png)
 
